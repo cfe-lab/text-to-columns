@@ -1,13 +1,15 @@
-<!DOCTYPE html>
+{% extends "tool_base.html" %}
+{% load static %}
 
-<html>
-	<head>
-		<link rel="stylesheet" href="../css/style.css">
-		<title>Text to Columns</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="../cgi-bin/script.js"></script>
-	</head>
-	<body>
+{% block head %}
+	<link rel="stylesheet" href="{% static "ttc_css/style.css" %}">
+	<title>Text to Columns</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="{% static "ttc_script.js" %}"></script>
+{% endblock %}
+	
+{% block content %}
+	<div id="body-div">
 		<div class="container">
 			<div class="title">
 				<h1>Text to Columns</h1>
@@ -15,17 +17,18 @@
 					Split a string of text into columns of it's characters
 				</p>
 			</div>
-			<form action="../cgi-bin/textToColumns.py" method="post" id="mainform">
-				<textarea id="userinput" name="userinput" placeholder="Enter single or multi-line text" required autofocus></textarea>
+			<form action="results/" method="post" id="form">
+				{% csrf_token %}
+				<textarea id="userinput" name="userinput" style="font-family:monospace;" placeholder="Enter single or multi-line text" required autofocus></textarea>
 				<div id="clearbutton" class="hide">Clear</div>
 				<div class="spacer"></div>
-				<button class="btn-large btn-blank round-sm btn-blue" value="on" name="runtranslate" type="submit" form="mainform">Run</button>
-				<button class="btn-large btn-blank round-sm btn-red" value="on" name="dltranslate" type="submit" form="mainform">Download</button>
+				<button class="btn-large btn-blank round-sm btn-blue" value="on" name="runtranslate" type="submit" form="form">Run</button>
+				<button class="btn-large btn-blank round-sm btn-red" value="on" name="dltranslate" type="submit" form="form">Download</button>
 			</form>
 			<h2>Validate sequence</h2>
 			<div id="copy"></div>
 			<div id="validate" contenteditable></div>
 			<div id="errors"></div>
 		</div>
-	</body>
-</html>
+	</div>
+{% endblock %}

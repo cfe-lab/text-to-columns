@@ -97,10 +97,11 @@ $(document).ready(function(){
 	$('#validate').bind('DOMNodeInserted', function(e) {
 		updateCopy($(this));
 	});
-
+	
+	/*
 	$('#validate').click(function() {
 		caret = getCaretCharacterOffsetWithin($(this));
 		console.log(caret);
 	});
-
+	*/
 });
